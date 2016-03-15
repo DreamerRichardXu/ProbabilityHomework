@@ -1,0 +1,83 @@
+
+\chapter{Probability Basics}
+
+	\section{Coin}
+	\textbf{Problem}\\
+	Do Bernoulli experiment for 20 trials, using a new 1-Yuan coin.Write down the results in a string $s_1 s_2 \cdots s_{20}$, where $s_i$ is 1 if the $i$-th trial gets Head,and otherwise is 0.
+	\\
+	\textbf{Solution}\\
+	The result of tossing a coin 20 times is:\\11101000111010101000.
+	
+	\section{Mutually and Pair-wise independent}
+	\textbf{Problem}\\
+	Give an example to show that pairwise independent does not mean mutually independent.\\\\
+	\textbf{Solution}\\
+	\begin{proof}
+			Mutually independent does not mean pair-wise independent.For example,$A,B,C$ are 3 pair-wise independent events, which means $A$ and $B$ are independent, $B$ and $C$ are independent and $A$ and $C$ are also independent.This gives the simple fact that 
+		\[ Pr(AB)=Pr(A)Pr(B) \]
+		\[ Pr(AC)=Pr(A)Pr(C) \]
+		\[ Pr(BC)=Pr(B)Pr(C) \]
+		But this has nothing directed to do with 
+		\[ Pr(ABC)=Pr(A)Pr(B)Pr(C) \]
+		which is exactly what mutually independent means.\\
+		All in all, mutually independent means pair-wise independent,but not hold vice versa.
+	\end{proof}
+	
+	\section{Monty Hall}
+	\textbf{Problem}\\
+	Suppose you are on a game show, and you are given the choice of three doors: Behind one door is a car; behind the others, goats. You pick a door, say No.1, and the host, who knows what is behind the doors, opens another door, say No.3, which has a goat. He then says to you, ``Do you want to pick door No.2?'' Calculate the probability that you wins the car if you switch you choice.\\\\
+	\textbf{Solution}\\
+	Consider the events $C_1,C_2$ and $C_3$ indicating the car is behind respectively door 1,2 or 3.All these 3 events have probability 1/3.\\
+	The player initially choosing door 1 is described by the event $X_1$.As the first choice of the player is independent of the position of the car,also the conditional probabilities are $Pr(C_i|X_1)=1/3$.The host opening door 3 is described by $H_3$.For this event it holds:
+	\[Pr(H_3|C_1,X_1) = \frac{1}{2}\]
+	\[Pr(H_3|C_2,X_1)\ = 1\]
+	\[Pr(H_3|C_3,X_1) = 0\]
+	Then,if the player initially selects door 1,and the host opens door 3,the conditional probability of winning by switching is:
+	\[
+		\begin{aligned}
+			&Pr(C_2|H_3,X_1)\\
+			&=\frac{Pr(H_3|C_2,X_1)Pr(C_2|X_1)}{Pr(H_3|X_1)}\\
+			&=\frac{Pr(H_3|C_2,X_1)Pr(C_2|X_1)}{Pr(H_3|C_1,X_1)Pr(C_1|X_1)+Pr(H_3|C_2,X_1)P(C_2|X_1)+Pr(H_3|C_3,X_1)Pr(C_3|X_1)}\\
+			&=\frac{Pr(H_3|C_2,X_1)}{Pr(H_3|C_1,X_1)+Pr(H_3|C_2,X_1)+Pr(H_3|C_3,X_1)}\\
+			&=\frac{1}{1/2+1+0}\\
+			&=\frac{2}{3}
+		\end{aligned}
+	\]
+	
+	\section{Dice}
+	\textbf{Problem}\\
+	Assume that you independently play an unbiased 6-facet dice for $n$ times. Let $X$ be the summation of the results. Calculate the probability that $X$ is divisible by 3.\\\\
+	\textbf{Solution}\\
+	Let $Y_i$ denote the result of $i-th$ tossing the dice,while $X$ the sum of $n$ times tossing the dice.It's clear that\\
+	\[X=\sum_{i=1}^{n}Y_i\]
+	\[X_k=\sum_{k}^{}Y_i\]
+	Therefore according to the Conditional probability theory\\
+	\[
+		\begin{aligned}
+			&Pr(X\, {\rm is\,  divisible \, by\,} 3)=Pr(X\, {\rm is\,  divisible\,  by\,} 3|X_{n-1}=x)Pr(X_{n-1}=x)\\
+			&=\sum_{y}^{}(Y_n+x \, {\rm is \, divisible \, \rm by \,} 3|X_{n-1}=x)Pr(X_{n-1}=x)\\
+			&=\frac{1}{3}\sum_{y}^{}Pr(X_{n-1}=x)\\
+			&=\frac{1}{3}
+		\end{aligned}
+	\]
+	
+	\section{Child Birth}
+	\textbf{Problem}\\
+	Assume that on an island, each couple gives birth to babies until a female baby comes out. Suppose that a baby will be male or female with probability 0.5. On average how many male/female babies does a couple have? What if each couple refuses to have more than 5 babies?\\\\
+	\textbf{Solution}\\
+	 Let M denote the number of male babies and F denote the number of female babies. If each couple gives birth to babies until a female baby comes out, we have
+	 \[
+	 E[F]=1
+	 \]
+	 and
+	 \[
+	 E[M]=\sum_{i \geq 1}^{}(i-1){\left(\frac{1}{2}\right)}^i=1
+	 \]
+	 If each couple refuses to have more than 5 babies, we have
+	 \[
+	 E[F]=1-{\left(\frac{1}{2}\right)}^5=\frac{31}{32}
+	 \]
+	 and
+	 \[
+	 E[M]=\sum_{i=1}^{5}(i-1){(\frac{1}{2})}^i+5\left(\frac{1}{2}\right)^5=\frac{31}{32}
+	 \]

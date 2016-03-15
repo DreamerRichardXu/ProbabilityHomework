@@ -1,0 +1,174 @@
+\chapter{Bins and Balls - Poisson Approximation}
+	
+	\section{Poisson Distribution}
+	\textbf{Problem}\\
+	Assume that for each $n$,there are Bernoulli random variables $B^n_1,\cdots,B^n_n$ with indicators $X^n_i$.Let $Y_n=\sum_{i=1}^{n}$,suppose that\\
+	(a)$\lim\limits_{n \rightarrow \infty}E[Y_n]=\lambda$,and\\
+	(b)For any $k$,$\lim\limits_{1 \leq i_1 < \cdots < i_k \leq n}Pr(\bigcap_{r=1}^{k}B^n_{i_r})=\frac{\lambda^k}{k!}$.\\
+	Prove that $\lim\limits_{n \rightarrow \infty}Pois(\lambda)$,i.e. $\lim\limits_{n \rightarrow \infty}Pr(Y_n=k)=\frac{e^{-\lambda}\lambda^k}{k!}$ for any $k$.\\\\
+	\textbf{Solution}\\
+	\begin{proof}
+		Since $Y_n=\sum_{i=1}^{n}X_i^n$,so $Y_n$ satisfies Binomial distribution.Suppose $Y_n\sim Bin(n,p)$.\\
+	Since $E[Y_n]=\sum_{i=1}^{n}Y_i \cdot p=\lambda$,so $p=\frac{\lambda}{n}$.
+	Therefore
+	\begin{equation*}
+		\begin{split}
+			\lim\limits_{n \rightarrow \infty}Pr(Y_n=k)
+			&= \lim\limits_{n \rightarrow \infty} \binom{n}{k} p^k (1-p)^{n-k}\\
+			&= \lim\limits_{n \rightarrow \infty} \frac{n!}{k!(n-k)!} \left(\frac{\lambda}{n} \right)^k \left(1-\frac{\lambda}{n} \right)^{n-k}\\
+			&= \lim\limits_{n \rightarrow \infty} \underbrace{\frac{n!}{n^k (n-k)!}}_{\rightarrow 1} \frac{\lambda^k}{k!} \underbrace{\left(1-\frac{\lambda}{n} \right)^{n-k}}_{\rightarrow e^{-\lambda}} \\
+			&= \frac{\lambda^k e^{-\lambda}}{k!} 
+		\end{split}
+	\end{equation*}
+	Such that the proof ends.\\
+	I also noticed that this problem is the case of weak independence,the following proof goes when $Y_n>0$,but as for $Y_n=k$,I basically have no idea how to figure it out.I tried Inclusion-exclusion principle and Taylor's expansion,but it turned out not working.\\
+	Since $\lim\limits_{n\rightarrow \infty}E[Y_n]=\lim\limits_{n\rightarrow \infty}E \left[\sum_{i=1}^{n}X_i^n \right]=\lim\limits_{n\rightarrow \infty}\sum_{i=1}^{n}E[X_i^n]=\lambda$,and $X_i^n$ satisfies Bernoulli distribution,so $\lim\limits_{n\rightarrow \infty}Pr(X_i^n)=\lambda$.\\
+	According to $inclusion-exclusion$ principle
+	\begin{equation*}
+		\begin{split}
+			Pr(Y_n=k)
+			&= Pr \left(\sum_{i=1}^{n}X_i^n=k \right)\\
+			&= \sum_{k=1}^{n}(-1)^{k-1} \sum_{1 \leq i_1 \le i_2 \le \cdots \le i_k \leq n}^{}Pr \left(\bigcap_{r=1}^{k}X_{i_r}^n \right)\\
+			&= Pr \left(\sum_{i=1}^{n}X_i^n \right) - \sum_{1 \leq i_j \le i_k \leq n}^{}Pr(X_i^n \cap X_j^n) + \cdots +(-1)^{n-1}\sum_{1 \leq i_1 \le i_2 \le \cdots \le i_k \leq n}^{} Pr \left(\bigcap_{r=1}^{n}X_{i_r}^n \right)\\
+			&= \lambda - \sum_{k=1}^{n}(-1)^{k-1}\frac{\lambda^k}{k!}
+		\end{split}
+	\end{equation*}
+	Besides,according to $Taylor's$ expansion,we have
+	\begin{equation*}
+		\lim_{n \rightarrow \infty} \left(\lambda - \frac{\lambda^2}{2}+\frac{\lambda^3}{3!}- \cdots + (-1)^{n-1}\frac{\lambda^{n-1}}{(n-1)!} \right)=e^{-\lambda}
+	\end{equation*}
+	Such that we can simply get $\lim\limits_{n\rightarrow \infty}Pr(Y_n=k)=\frac{e^{-\lambda}\lambda^k}{k!}$.
+	\end{proof}
+	
+	\section{Poisson Distribution 2}
+	\textbf{Problem}\\
+	Deﬁne the Poisson experiment: $n$ bins, each is filled with independent $Poisson(m/n)$ balls. Let $E$ be the event that no bins are empty, and $X$ be the total number of balls filled with. Prove that $Pr(E|X = k)$ increases with $k$.\\\\
+	\textbf{Solution}\\
+	\begin{proof}
+		If we set variable $Y$ as the number of empty bins, so we can get that
+		\[
+		Pr(E|X = k) = Pr(Y = 0|X = k) = 1 - \sum_{i = 1}^{n - 1}Pr(Y = i | X = k)
+		\]
+		Because $\{Y = i | X = k + 1\}$ can be derived by two situations:
+		\begin{itemize}
+			\item By $\{Y = i | X = k\}$ and the next ball fall into the $n - k$ bins who are not empty.
+			\item By $\{Y = i + 1|X= k\}$ and the next ball fall into any one bin of the $i + 1$ bins who are empty.
+		\end{itemize}
+		So we can get that
+		\[
+		Pr(Y = i|X = k+1) = Pr(Y=i|X = k)\frac{n - i}{n} + Pr(Y = i| X = k)\frac{i + 1}{n}.
+		\]
+		Therefore
+		\begin{equation*}
+			\begin{split}
+				Pr(E | X = k + 1)
+				&= Pr(Y = 0 | X = k　+ 1)\\
+				&= 1 - \sum_{i = 1}^{n - 1}Pr(Y = i | X = k + 1)\\
+				&= 1 - \sum_{i = 1}^{n - 1}Pr(Y = i|X = k)\frac{n - i}{n} - \sum_{i = 1}^{n - i}Pr(Y = i + 1|X = k)\frac{i + 1}{n}\\
+				&= 1 - \sum_{i = 1}^{n - 1}Pr(Y = i | X = k)\frac{n - i}{n} - \sum_{i = 2}^{n}Pr(Y = i | X = k)\frac{i}{n}\\
+				&=1 - \frac{n - 1}{n}Pr(Y = 1 | X = k) - \sum_{i = 2}^{n - 1}Pr(Y = i|X = k)\frac{n - i}{n} - \sum_{i = 2}^{n}Pr(Y = i|X = k)\frac{i}{n}\\
+				&=1 - \frac{n - 1}{n}Pr(Y = 1|X = k) - \sum_{i = 2}^{n - 1}\left(\frac{n - i}{n}+\frac{i}{n}\right)Pr(Y = i| X = k)\\
+				&=1 - \sum_{i = 2}^{n - 1}Pr(Y = i|X = k) - Pr(Y = 1|X = k) + \frac{1}{n}Pr(Y = 1|X = k)\\
+				&= 1 - \sum_{i = 1}^{n - 1}Pr(Y = i | X = k) + \frac{1}{n}Pr(Y = 1|X = k)\\
+				&= Pr(E|X = k) + \frac{1}{n}Pr(Y = 1 | X = k)\\
+				&> Pr(E|X = k).
+			\end{split}
+		\end{equation*}
+		Such that the proof ends.
+	\end{proof}
+	\textbf{Proof using Poisson approximation}
+	
+		\begin{proof}
+			The number of balls in the bins satisfies Poisson distribution,so
+	\begin{equation*}
+		Pr(k=0)=\frac{e^{-\lambda \lambda^k}}{k!}=e^{-\frac{m}{n}}
+	\end{equation*}
+	So the probability of no bins are empty is
+	\begin{equation*}
+		Pr(\epsilon)=\left(1-e^{-\frac{m}{n}}\right)^n=e^{-ne^{-\frac{m}{n}}}
+	\end{equation*}
+	According to Poisson Approximation
+	\begin{equation*}
+		Pr(\epsilon|X=k)=e^{-ne^{-\frac{k}{n}}}
+	\end{equation*}
+	It's clear this function goes monotonically with $k$.
+		\end{proof}
+
+	
+	\section{Poisson Distribution 3}
+	\textbf{Problem}\\
+	Follow the Poisson experiment and the notation in the last question. Assume that $m=n\ln n +cn$. Rigorously prove that $Pr(\epsilon|X=m+\sqrt{2m\ln m})-Pr(\epsilon|X=m-\sqrt{2m\ln m}) \rightarrow 0$ as $n \rightarrow \infty$.\\\\
+	\textbf{Solution}\\
+	\begin{proof}
+		From the book we know that
+	\begin{equation*}
+		Pr(\epsilon|X=m+\sqrt{2m\ln m})-Pr(\epsilon|X=m-\sqrt{2m\ln m}) \geq |Pr(\epsilon||X-m|\leq \sqrt{2m\ln m})-Pr(\epsilon|X=m)|
+	\end{equation*}
+	And because
+	\begin{equation*}
+		|Pr(\epsilon||X-m|\leq \sqrt{2m\ln m})-Pr(\epsilon|X=m)|=o(1)
+	\end{equation*}
+	So the limit is $o(1)$.
+	\end{proof}
+	
+	\section{Agent and Resource}
+	\textbf{Problem}\\
+	The following problem models a simple distributed system wherein agents contend for resources but back off in the face of contention. Balls represent agents, and bins represent resources.\\
+	The system evolves over rounds. Every round, balls are thrown independently and uniformly at random into $n$ bins. Any ball that lands in a bin by itself is served and removed from consideration. The remaining balls are thrown again in the next round. We begin with n balls in the first round, and we will finish when every ball is served.
+	\begin{itemize}
+		\item If there are $b$ balls at the start of a round, what is the expected number of balls at the start of the next round?
+		\item Suppose that every round the number of balls served was exactly the expected number of balls to be served. Show that all the balls would be served in $O(ln ln n)$ rounds. (Hint: If $x_j$ is the expected number of balls left after j rounds, show and use that $x_{j+1} \le x^2_j/n$.)
+	\end{itemize}
+	\textbf{Solution}\\
+	\begin{itemize}
+		\item
+		Consider the probability that a bin has 1 ball,denote it as $X_i$,then the probability satisfies $binomial$ distribution,so
+		\begin{equation*}
+		Pr(X_i)=\binom{b}{1} \frac{1}{n} \left(1-\frac{1}{n} \right)^{b-1}
+		\end{equation*}
+		Such that for $n$ bins,the expected number of balls of $n$ bins after 1 round is
+		\begin{equation*}
+		E\left[\sum_{i=1}^{n} X_i\right]= \sum_{i=1}^{n} E(X_i)= b \left(1-\frac{1}{n}\right)^{b-1}
+		\end{equation*}
+		Therefore the expected number of balls left is $b-b \left(1-\frac{1}{n}\right)^{b-1}$.
+		\item
+		\begin{proof}
+			From above we have
+		\begin{equation*}
+		\begin{split}
+		x_{j+1} 
+		&= x_j-x_j \left(1-\frac{1}{n}\right)^{x_j-1}\\
+		&\leq x_j-x_j \left(1-\frac{x_j-1}{n}\right)\\
+		&= \frac{x_j^2}{n}
+		\end{split}
+		\end{equation*}
+		So
+		\begin{equation*}
+		\begin{split}
+		x_1 &\leq \frac{x_0^2}{n}\\
+		x_2 \leq \frac{x_1^2}{n} &\leq \frac{x_0^4}{n^3}\\
+		\cdots\\
+		x_j &\leq \frac{x_0^{2^j}}{n^{2^j-1}}
+		\end{split}
+		\end{equation*}
+		Note that $x_0=n$,we simply let $x_{j-1}=1$,which means after $j$ rounds,there will be no balls left.
+		Since $x_j \leq \frac{x_0^{2^j}}{n^{2^j-1}}$,so
+		\begin{equation*}
+		\begin{split}
+		2^j \leq 2j\ln x_0-\ln x_j +1\\
+		j \leq \ln \left(2j\ln x_0 - \ln x_j +1\right)\\
+		j \leq \ln \ln x_0+\ln2j
+		\end{split}
+		\end{equation*}
+		Since $x_{j-1}=1,x_0=n$,we can simply get $j \leq \ln \ln n$,which means $j=O(\ln \ln n)$.
+		\end{proof}
+	\end{itemize}
+
+	\section{Coin}
+	\textbf{Problem}\\
+	Do Bernoulli experiment for 20 trials, using a new 1-Yuan coin.Write down the results in a string $s_1 s_2 \cdots s_{20}$, where $s_i$ is 1 if the $i$-th trial gets Head,and otherwise is 0.
+	\\
+	\textbf{Solution}\\
+	The result of tossing a coin 20 times is:\\11101000111010101000.
+	
+

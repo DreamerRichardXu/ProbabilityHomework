@@ -1,0 +1,166 @@
+\chapter{Bins and balls: handling dependence}
+	
+	\section{Maxload}
+	\textbf{Problem}\\
+	Suppose that balls are thrown randomly into $n$ bins. Show, for some constant $c_1$, that
+	if there are $c_1\sqrt{n}$ balls then the probability that no two land in the same bin is at most
+	$1/e$. Similarly, show for some constant $c_2$ (and sufficiently large $n$) that, if there are $c_2\sqrt{n}$
+	balls, then the probability that no two land in the same bin is at least $1/2$. Make these
+	constants as close to optimum as possible. Hint: you may need the fact that $e^{-x} \ge 1-x$
+	and $e^{-x-x^2} \le 1-x$ for $x \le 1/2$.\\\\
+	\textbf{Solution}\\
+	\begin{itemize}  
+		\item 
+			Find $c_1$\\
+			The probability that max load is 1 is
+			\begin{equation*}
+				\begin{split} 
+					Pr(MaxLoad=1) &= (1-\frac{1}{n})(1-\frac{2}{n})\cdots (1-\frac{c_1\sqrt{n}-1}{n}) \\
+					&\le \prod_{i=1}^{c_1\sqrt{n}-1} e^{-\frac{i}{n}} \\
+					&= e^{\frac{c_1\sqrt{n}-c_1^2n}{2n}} \\
+					&\le e^{\frac{c_1-c_1^2}{2}}
+				\end{split}
+			\end{equation*}
+			Then we set $\frac{c_1-c_1^2}{2} \le -1$, and get $c_1 \ge 2$. \qed
+			
+		\item 
+			The probability that max load is 1 is
+			\begin{equation*}
+				\begin{split}
+					Pr(MaxLoad=1) &= (1-\frac{1}{n})(1-\frac{2}{n})\cdots (1-\frac{c_2\sqrt{n}-1}{n}) \\
+					&\ge \prod_{i=1}^{c_2\sqrt{n}-1} e^{-\frac{i}{n}-\frac{i^2}{n^2}} \\
+					&= e^{ -\frac{c_2\sqrt{n}(c_2\sqrt{n})}{2n} -\frac{(c_2\sqrt{n}-1)c_2\sqrt{n}(2c_2\sqrt{n}-1)}{6n^2}} \\
+					&\ge e^{ -\frac{c_2^2}{2} -\frac{2c_2^3n\sqrt{n}}{6n^2} } \\
+					&\ge e^{ -\frac{c_2^2}{2} -\frac{c_2^3}{3} } \\
+					&\ge 1 -\frac{c_2^2}{2} -\frac{c_2^3}{3}
+				\end{split}
+			\end{equation*}
+			Then we set $1 -\frac{c_2^2}{2} -\frac{c_2^3}{3} \ge \frac{1}{2}$, and get $0 \le c_2 \le 0.8$ .\qed
+	\end{itemize}
+	
+	\section{Poisson Variables}
+	\textbf{Problem}\\
+	Let $X$ be a Poisson random variable with mean $\mu$, representing the number of errors on a
+	page of this book. Each error is independently a grammatical error with probability $p$ and
+	a spelling error with probability $1-p$. If $Y$ and $Z$ are random variables representing the
+	numbers of grammatical and spelling errors (respectively) on a page of this book, Prove
+	that $Y$ and $Z$ are Poisson random variables with means $p\mu$ and $(1-p)\mu$, respectively.
+	Also, prove that $Y$ and $Z$ are independent.\\\\
+	\textbf{Solution}\\
+	\begin{itemize}  
+		\item $Y$ and $Z$ are Poisson random variables\\
+		\begin{proof}
+			Since $X \sim Poisson(\mu)$, So
+			\begin{equation*}
+				Pr(X=k) = e^{-\mu} \frac{\mu^k}{k!}
+			\end{equation*}
+			
+			And
+			\begin{eqnarray*}
+				\begin{split}
+					Pr(Y=k) 
+					&= \sum_{i=k}^{\infty} Pr(X=i) \binom{i}{k} p^k (1-p)^{i-k} \\
+					&= \frac{e^{-\mu} p^k \mu^k}{k!} \sum_{i=k}^{\infty} \frac{\mu^{i-k}(1-p)^{i-k}}{(i-k)!} \\
+					&= \frac{e^{-\mu} p^k \mu^k e^{\mu(1-p)}}{k!} \\
+					&= e^{-\mu p}\frac{(\mu p)^k}{k!}
+				\end{split}
+			\end{eqnarray*}
+			So $Y \sim Poisson(p\mu)$.The same goes for $Z$.
+		\end{proof}
+		
+		\item $Y$ and $Z$ are independent
+		
+			\begin{proof}
+				\begin{equation*}
+				\begin{split}
+					Pr(Y=k_1, Z=k_2) 
+					&= Pr(X=k_1+k_2) \binom{k_1+k_2}{k_1} p^{k_1} (1-p)^{k_2} \\
+					&= e^{-\mu} \frac{\mu^{k_1+k_2}}{(k_1+k_2)!} \frac{(k_1+k_2)!}{k_1! k_2!} p^{k_1} (1-p)^{k_2}\\
+					&= e^{-p\mu} \frac{(p\mu)^(k_1)}{k_1!} \cdot e^{-(1-p)\mu} \frac{((1-p)\mu)^{k_2}}{k_2!} \\
+					&= Pr(Y=k_1) \cdot Pr(Z=k_2)
+				\end{split}
+			\end{equation*}
+			
+			So $Y$ and $Z$ are independent.
+			\end{proof}
+	\end{itemize} 
+	
+	\section{Birthday}
+	\textbf{Problem}\\
+	There are $n$ students in a classroom. Assume that their birthdays are uniformly randomly distributed and that every year has 365 days. Calculate the probability that there are two students having the same birthday and the probability that randomly choosing a student, there exists another student having the same birthday with him/her.\\\\
+	\textbf{Solution}\\
+	\begin{itemize}
+		\item The first question ``two people share the same birthday'' is a bit \textbf{ambiguous} because we really don't know the purpose is to calculate there are \textbf{EXACTLY} two people sharing the same birthday or there are \textbf{AT　 LEAST}　  two 　people sharing the same birthday.So we calculate them both:\\
+		\textbf{AT LEAST} two people:\\
+			Consider the event of no people share the same birthday as $A$,it's easy to know that
+			\begin{equation*}
+			Pr(A)=\frac{A(365,n)}{365^n}
+			\end{equation*}
+			So the probability that at least two people share the same birthday is
+			\begin{equation*}
+				Pr \left(\overline{A} \right)=1-Pr(A)=1-\frac{A(365,n)}{365^n}.
+			\end{equation*}
+			\textbf{EXACTLY} two people:\\
+			\[
+			Pr(EXACTLY)=\frac{\binom{n}{2} A(364,n-2)}{365^n}.
+			\]
+		\item
+			Let $B$ denote that randomly choosing a student $b$,there is no other students having the same birthday as him/her,so
+			\begin{equation*}
+				Pr(B)=\binom{n}{1} \frac{1}{365} \left(\frac{364}{365}\right)^{n-1} 
+			\end{equation*}
+				So the probability that there is at least another student sharing the same birthday as $b$ is
+				\begin{equation*}
+				Pr \left(\overline{B} \right)=1-Pr(B)=1-\binom{n}{1} \frac{1}{365} \left(\frac{364}{365}\right)^{n-1}.
+				\end{equation*}
+	\end{itemize}
+	
+	\section{Poisson and Chernoff Bound}
+	\textbf{Problem}\\
+	Prove Chernoff-like boounds for Poisson random variable $X_\mu$ with expectation $\mu$:\\
+	(1)If $x>\mu$,then $Pr(X_\mu \leq x) \leq \frac{e^{-\mu}(e\mu)^x}{x^x}.$\\
+	(2)If $x<\mu$,then $Pr(X_\mu \leq x) \leq \frac{e^{-\mu}(e\mu)^x}{x^x}.$\\\\
+	\textbf{Solution}\\
+	\begin{proof}
+		For any $t > 0$ and $x > \mu$,we have
+	\begin{equation*}
+		Pr(X \ge x)=Pr(e^{tX_\mu} \ge e^{tx}) \leq \frac{E[e^{tX_\mu}]}{e^{tx}}
+	\end{equation*}
+	Considering the generating function of Poisson distribution, we have
+	\begin{equation*}
+		Pr(X_\mu \ge x) \leq e^{\mu(e^t-1)-xt}.
+	\end{equation*}
+	Choosing $t=\ln(x/\mu) > 0$ gives
+	\begin{equation*}
+		\begin{split}
+			Pr(X_\mu \ge x) 
+			& \leq e^{x-\mu-x\ln(x/\mu)}\\
+			& = \frac{e^{-\mu}(e\mu)^x}{x^x}.
+		\end{split}
+	\end{equation*}
+	For any $t < 0$ and $x < \mu$,
+	\begin{equation*}
+		Pr(X_\mu \leq x)=Pr(e^{tX_\mu} \ge e^{tx}) \leq \frac{E[e^{tX_\mu}]}{e^{tx}}
+	\end{equation*}
+	Hence
+	\begin{equation*}
+		Pr(X_\mu \leq x) \leq e^{\mu(e^t-1)-xt}.
+	\end{equation*}
+	Choosing $t=\ln(x/\mu) < 0$,it follows that
+	\begin{equation*}
+		\begin{split}
+			Pr(X_\mu \leq x) 
+			& \leq e^{x-\mu-x\ln(x/\mu)}\\
+			& = \frac{e^{-\mu}(e\mu)^x}{x^x}.
+		\end{split}
+	\end{equation*}
+	Such that the proof ends.
+	\end{proof}
+	
+	\section{Coin}
+		\textbf{Problem}\\
+		Do Bernoulli experiment for 20 trials, using a new 1-Yuan coin.Write down the results in a string $s_1 s_2 \cdots s_{20}$, where $s_i$ is 1 if the $i$-th trial gets Head,and otherwise is 0.
+		\\
+		\textbf{Solution}\\
+		The result of tossing a coin 20 times is:\\11101000111010101000.
+	

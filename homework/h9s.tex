@@ -1,0 +1,93 @@
+\chapter{A Brief Introduction to Markov Chains}
+	
+	\section{Graph and Matrix}
+	\textbf{Problem}\\
+	Consider an arbitrary Markov chain with transition matrix $P$ and transition diagram $G$. Recall that state $i$ leads to state $j$ if and only if multi-step transition probability $p(n) > 0$ for some $n > 0$. On the other hand, $j$ can be reached from $i$ in $G$ if and only if there is a directed path from $i$ to $j$. Please show that $i$ leads to state $j$ in the Markov chain if and only if $j$ can be reached from $i$ in $G$.\\\\
+	\textbf{Solution}\\
+	\begin{proof}
+		Since $i$ can lead to $j$,there always exists a path from $i$ to $j$,say $i \rightarrow k_1 \rightarrow k_2 \cdots k_{n-1} \rightarrow k_n \rightarrow j$,sufficing 
+	\[
+		P_{ik_1} > 0, P_{k_1 k_2} > 0, \cdots ,P_{k_{n-1} k_{n-2}} > 0,P_{k_{n} j} > 0
+	\]
+	For the path with length 2,there exists a state $k$ such that $i \rightarrow k \rightarrow j$,which means $P_{ik} > 0,P_{kj} > 0$,sufficing $P^{(2)}_{ij} > P_{ik}P_{kj} > 0$.\\
+	For the path with length $n$,According to C-K equation
+	\begin{equation*}
+		\begin{split}
+			P^n_{ij} &= \sum_{k=0}^{\infty} P^{m}_{ik} P^{n-m}_{kj}\\
+			&\geq P_{ik_1} P_{k_1 k_2} \cdots P_{k_{n-1} k_n} P_{k_n j}\\
+			&> 0
+		\end{split}
+	\end{equation*}
+	This proof holds for all the paths with length $n$.Similarly for all the other paths longer than $n$ we can use \textbf{induction} to make the conclusion hold.
+	Such that the proof ends.
+	\end{proof}
+	
+	\section{Aperiodic}
+	\textbf{Problem}\\
+	We say a Markov chain is aperiodic if and only if all states in the chain are aperiodic. Given a finite-state aperiodic Markov chain, assume that each pair of states communicates. Then prove that if $n$ is large enough, $p^{(n)}_{ij} > 0$ for all states $i$, $j$.\\\\
+	\textbf{Solution}\\
+	\begin{proof}
+		For an aperiodic state $i$, $\exists  r$, sufficing $P^{(r)}_{ii}>0$. On the other hand,since each pair of states communicates,$\exists t$,sufficing $P^{(t)}_{ij} > 0$.\\
+	Thus if $n$ is large enough,say $n \geq r + t$,it will suffice
+	\[
+	P^{(n)}_{ij}>P^{(r)}_{ii} P^{(t)}_{ij}>0
+	\]
+	Such that the proof ends.
+	\end{proof}
+	
+	\section{Hitting Time}
+	\textbf{Problem}\\
+	Given a Markov chain,let $i$ be a state.Define $f^{(k)}_{ii}$ to be the probability that starting with state $i$ at time 0,the chain first returns to state $i$ at time $k$,and $p^{(k)}_{ii}$ be the $k$-step probability of returning to $i$ from $i$.Prove that $p^{(n)}_{ii}=\sum_{i=1}^{n}f^{(k)}_{ii}p^{(n-k)}_{ii}$,where $p^{(0)}_{ii}=1$.\\\\
+	\textbf{Solution}\\
+	\begin{proof}
+		We now proof the normal situation:
+	\[
+	P^{(n)}_{ij}=\sum_{m = 1}^{n}f^{(n)}_{ij}p^{(n-m)}_{jj},n \geq 1.
+	\]
+	From Elementary Probability,
+	\begin{equation*}
+	\begin{split}
+	p^{(n)}_{ij}=P_i(X_n=j) &=\sum_{m = 1}^{n}P_i(T_j = m,X_n = j)\\
+	&=\sum_{m = 1}^{n}P_i(T_j=m)P_i(X_n=j|T_j=m)
+	\end{split}
+	\end{equation*}
+	The first term equals $f^{(m)}_{ij}$,by definition.For the second term,we use the Strong Markov Property:
+	\[
+	P_i(X_n = j|T_j = m) = P_i(X_n = j|X_m = j)=P^{(n-m)}_{jj}.
+	\]
+	Let $j = i$ such that the proof ends.
+	\end{proof}
+	
+	\section{Finite and Recurrent}
+	\textbf{Problem}\\
+	Given a finite markov chain, where finiteness means that there are a finite number of states, prove that
+	\begin{enumerate}
+		\item At least one state is recurrent.
+		\item All recurrent states are positive recurrent.
+	\end{enumerate}
+	\textbf{Solution}
+	\begin{enumerate}
+		\item
+		Since there are a finite number of communicating classes, and
+		since once the chain leaves a communicating class it cannot return, it must
+		eventually settle into one communicating class. Thus, at least one state in this
+		class is visited an unbounded number of times after the chain enters it.
+		\item
+		Let $C(i)$ denote the communicating class containing state $i$. Let $p$ be the largest transition probability less than 1 from any states in $C(i)$.
+		\begin{equation*}
+			h_{i,i} = \sum_t t r_{i,i}^t \le \sum_t t p^t
+		\end{equation*}
+		Since there are finite state so $r_{i,i}^t = 0, t>n$. Therefore
+		\begin{equation*}
+			h_{i,i} \le \sum_{t=1}^{n} t p^t \le \frac{n}{1-p} < \infty
+		\end{equation*}
+		Then $i$ is positive recurrent.
+		
+	\end{enumerate}
+	
+	\section{Coin}
+	\textbf{Problem}\\
+	Do Bernoulli experiment for 20 trials, using a new 1-Yuan coin.Write down the results in a string $s_1 s_2 \cdots s_{20}$, where $s_i$ is 1 if the $i$-th trial gets Head,and otherwise is 0.
+	\\
+	\textbf{Solution}\\
+	The result of tossing a coin 20 times is:\\11101000111010101000.

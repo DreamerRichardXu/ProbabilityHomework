@@ -1,0 +1,54 @@
+\contentsline {chapter}{\numberline {1}Probability Basics}{5}{chapter.1}
+\contentsline {section}{\numberline {1.1}Coin}{5}{section.1.1}
+\contentsline {section}{\numberline {1.2}Mutually and Pair-wise independent}{5}{section.1.2}
+\contentsline {section}{\numberline {1.3}Monty Hall}{5}{section.1.3}
+\contentsline {section}{\numberline {1.4}Dice}{6}{section.1.4}
+\contentsline {section}{\numberline {1.5}Child Birth}{6}{section.1.5}
+\contentsline {chapter}{\numberline {2}Moments and Inequalities}{9}{chapter.2}
+\contentsline {section}{\numberline {2.1}Quicksort}{9}{section.2.1}
+\contentsline {section}{\numberline {2.2}Markov's Inequality}{9}{section.2.2}
+\contentsline {section}{\numberline {2.3}Moment and Chernoff Bound}{11}{section.2.3}
+\contentsline {section}{\numberline {2.4}Convex Function and Chernoff Bound}{11}{section.2.4}
+\contentsline {section}{\numberline {2.5}Coin}{12}{section.2.5}
+\contentsline {chapter}{\numberline {3}Bins and balls: handling dependence}{13}{chapter.3}
+\contentsline {section}{\numberline {3.1}Maxload}{13}{section.3.1}
+\contentsline {section}{\numberline {3.2}Poisson Variables}{13}{section.3.2}
+\contentsline {section}{\numberline {3.3}Birthday}{14}{section.3.3}
+\contentsline {section}{\numberline {3.4}Poisson and Chernoff Bound}{15}{section.3.4}
+\contentsline {section}{\numberline {3.5}Coin}{15}{section.3.5}
+\contentsline {chapter}{\numberline {4}Bins and Balls - Poisson Approximation}{17}{chapter.4}
+\contentsline {section}{\numberline {4.1}Poisson Distribution}{17}{section.4.1}
+\contentsline {section}{\numberline {4.2}Poisson Distribution 2}{18}{section.4.2}
+\contentsline {section}{\numberline {4.3}Poisson Distribution 3}{19}{section.4.3}
+\contentsline {section}{\numberline {4.4}Agent and Resource}{19}{section.4.4}
+\contentsline {section}{\numberline {4.5}Coin}{20}{section.4.5}
+\contentsline {chapter}{\numberline {5}Bins and Balls - Applications}{21}{chapter.5}
+\contentsline {section}{\numberline {5.1}Balls Expectation}{21}{section.5.1}
+\contentsline {section}{\numberline {5.2}Bloom Filter}{22}{section.5.2}
+\contentsline {section}{\numberline {5.3}Coin}{23}{section.5.3}
+\contentsline {chapter}{\numberline {6}Set 6-NULL}{25}{chapter.6}
+\contentsline {chapter}{\numberline {7}The Method of Counting and Expectation}{27}{chapter.7}
+\contentsline {section}{\numberline {7.1}Turan Theorem}{27}{section.7.1}
+\contentsline {section}{\numberline {7.2}Independent Set}{28}{section.7.2}
+\contentsline {section}{\numberline {7.3}2-Coloring Edge}{28}{section.7.3}
+\contentsline {section}{\numberline {7.4}2-Coloring Edge Proof}{28}{section.7.4}
+\contentsline {section}{\numberline {7.5}Coin}{29}{section.7.5}
+\contentsline {chapter}{\numberline {8}Derandomization, Second Moment Method, Lovasz Local Lemma}{31}{chapter.8}
+\contentsline {section}{\numberline {8.1}Find Edge Coloring}{31}{section.8.1}
+\contentsline {section}{\numberline {8.2}Second Moment Method}{31}{section.8.2}
+\contentsline {section}{\numberline {8.3}Asymmetric Lovasz Lemma}{32}{section.8.3}
+\contentsline {section}{\numberline {8.4}Vertex Coloring}{33}{section.8.4}
+\contentsline {section}{\numberline {8.5}Read Paper}{33}{section.8.5}
+\contentsline {chapter}{\numberline {9}A Brief Introduction to Markov Chains}{35}{chapter.9}
+\contentsline {section}{\numberline {9.1}Graph and Matrix}{35}{section.9.1}
+\contentsline {section}{\numberline {9.2}Aperiodic}{35}{section.9.2}
+\contentsline {section}{\numberline {9.3}Hitting Time}{35}{section.9.3}
+\contentsline {section}{\numberline {9.4}Finite and Recurrent}{36}{section.9.4}
+\contentsline {section}{\numberline {9.5}Coin}{36}{section.9.5}
+\contentsline {chapter}{\numberline {10}Excursions and Stationary Distributions of Markov Chains}{37}{chapter.10}
+\contentsline {section}{\numberline {10.1}Strong Markov Property}{37}{section.10.1}
+\contentsline {section}{\numberline {10.2}Expectation Markov}{37}{section.10.2}
+\contentsline {section}{\numberline {10.3}Excursion and Recurrent}{38}{section.10.3}
+\contentsline {section}{\numberline {10.4}Two Chains Stability}{38}{section.10.4}
+\contentsline {section}{\numberline {10.5}Coin}{39}{section.10.5}
+\contentsfinish 

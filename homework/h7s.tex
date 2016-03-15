@@ -1,0 +1,118 @@
+\chapter{The Method of Counting and Expectation}
+	
+	\section{Turan Theorem}
+	\textbf{Problem}\\
+	We mentioned a probabilistic proof of Turan theorem in the lecture notes. Recall the random process generating an independent set $S$. Let $p$ be the probability that the independent set $S$ has size at least $\frac{|V|}{D+1}$.Show that $p > \frac{1}{2D|V|^2}$.\\\\
+	\textbf{Solution}\\
+	\begin{proof}
+		For a vertex $i$,the probability it is picked is $Pr(X_i=1) = \frac{1}{d_i+1}$.\\
+	The expectation of the size of the independent set $S$ is
+	\begin{equation*}
+		\begin{split}
+			E(|S|)
+			&=E \left(\sum_{i=1}^{|V|}X_i \right)\\
+			&= \sum_{i = 1}^{|V|} E(X_i)\\
+			&= \sum_{i = 1}^{|V|}\frac{1}{d_i + 1}
+		\end{split}
+	\end{equation*}
+	According to the $Harmonic \ mean$ property,we know that
+	\[
+	\frac{|V|}{\sum_{i = 1}^{|V|}\frac{1}{d_i+1}} \leq \frac{\sum_{i=1}^{|V|}d_i+1}{|V|}\leq D + \frac{1}{|V|} \leq D+1
+	\]
+	which means $E(|S|) \geq \frac{|V|}{D + 1}$.
+	Therefore
+	\begin{equation*}
+		\begin{split}
+			\frac{|V|}{D + 1} \leq E(|S|)
+			&=\sum_{i = 1}^{|V|}Pr(|S| = i)i\\
+			&= \sum_{i = 1}^{\frac{|V|}{D+1} - 1}Pr(|S| = i)i + \sum_{i = \frac{|V|}{D+1}}^{|V|}Pr(|S| = i)i\\
+			&\leq \left(\frac{|V|}{D+1} - 1\right)(1 - p) + |V| \cdot p
+		\end{split}
+	\end{equation*}
+	The above equation derives
+	\[
+		p \geq \frac{1}{1 + \frac{D |V|}{D + 1}}
+	\]
+	For a complete graph,$D = |V| - 1$;otherwise $D < |V| - 1$.So $D \leq |V| - 1$.And $D = \frac{2E}{|V|}$,sufficing
+	\[
+	p \geq \frac{1}{1 + \frac{D |V|}{D + 1}} \geq \frac{1}{|V|} \geq \frac{1}{4E|V|} \geq \frac{1}{2D|V|^2}.
+	\]
+	Such that the proof ends.
+	\end{proof}
+	
+	\section{Independent Set}
+	\textbf{Problem}\\
+	Given an $n$-vertex undirected graph $G = (V, E)$, consider the following method of generating an independent set. Given a permutation $\sigma$ of the vertices, define a subset $S(\sigma)$ of the vertices as follows: for each vertex $i, i \in S(\sigma)$ if and only if no neighbor $j$ of $i$ precedes $i$ in the permutation $\sigma$.
+	
+	\begin{itemize}
+		\item Show that each $S(\sigma)$ is an independent set in $G$.
+		\item Suggest a natural randomized algorithm to produce $\sigma$ for which you can show that the expected cardinality of $S(\sigma)$ is $\sum_{i=1}^{n} \frac{1}{d_i+1}$, where $d_i$ denotes the degree of vertex $i$.
+	\end{itemize}
+	\textbf{Solution}\\
+	\begin{itemize}
+	\item
+	According to the algorithm describe above, we denote the permutation $\sigma$ as $\sigma = {v_1, v_2, \dots, v_i, \dots, v_n}$ where $n$ is the number of vertex. And $S(\sigma)={d_1, d_2, \dots, d_k}$, where $k$ is the size of $S(\sigma)$. Obviously, $d_1 = v_1 \in S(\sigma)$ as the first element. Let's look at the $d_i$ which belongs to $S(\sigma)$. There's no connection with the $d_j$ where $j<i$, because no neighbor of it precedes before. And any $d_j$ where $j>i$ has no connection with $d_i$ for the same reason. So the vertices in $S(\sigma)$ is an independent set in $G$.
+	
+	\item
+	With the natural randomized algorithm to produce $\sigma$. The expectation of vertex $v_i$ in the subset $S(\sigma)$ is $E(v_i) = \frac{1}{d_i+1}$, for the reason of that $v_i$ need occur first within its $d_i$ neighbors and itself, so the probability of that is $\frac{1}{d_i+1}$.\\
+	So consider all of $n$ vertices $E(S(\sigma)) = \sum_{i=1}^{n} \frac{1}{d_i+1}$.
+	\end{itemize}
+	
+	\section{2-Coloring Edge}
+	\textbf{Problem}\\
+	Prove that, for every integer $n$, there exists a way to 2-color the edges of $K_x$ so that there is no monochromatic clique of size $k$ when $x = n - ({}_k^n) 2^{1-({}_2^k)}$. Note that $K_x$ stands for the x-vertex complete graph. (Hint, start by 2-coloring the edges of $K_n$ and fix things up.)\\\\
+	\textbf{Solution}\\
+	\begin{proof}
+		In $K_n$ graph chose a k-cliques from $({}_k^n)$ k-cliques in $K_n$. Let $X_i$ be an random variable, such that $X_i=1$ if clique $i$ is monochromatic and 0 otherwise. Further let $X=\sum X_i$.\\
+	\begin{equation*}
+		E[X] = \sum E[X_i] = ({}_k^n) 2^{-({}_2^k)+1}
+	\end{equation*}
+	Then we remove a vertex from each monochromatic k-clique. Then the residual graph is a complete graph without monochromatic k-cliques. The expectation of number of vertices in the residual graph is
+	\begin{equation*}
+		n-E[X] = n - ({}_k^n) 2^{-({}_2^k)+1} = x
+	\end{equation*}
+	So there is a 2-coloring of $K_n$ where removing a vertex from each monochromatic k-clique results in a $K_y$, $y\ge x$ that has no monochromatic k-clique. If $K_y$ does not have a monochromatic $K_k$, because $y \ge x$ $K_x$ does not have too.
+	\end{proof}
+	
+	\section{2-Coloring Edge Proof}
+	\textbf{Problem}\\
+	Prove the following claims.
+	\begin{itemize}
+		\item For every integer $n$, there exists a coloring of the edges of the complete graph $K_n$ by two colors so that the total number of monochromatic copies of $K_4$ is at most $({}_4^n) 2^{-5}$.
+		\item Give a randomized algorithm for finding a coloring with at most $({}_4^n) 2^{-5}$ monochromatic copies of $K_4$ that runs in expected time polynomial in $n$.
+	\end{itemize}
+	\textbf{Solution}\\
+	\begin{itemize}
+	\item
+	First we consider random 4 vertices in n-vertices graph. Once one of edges is colored, then the remain $({}_2^4)-1 = 5$ edges have the probability $Pr(A_i) = 2^{-5}$ to color to the same color. Where $A_i$ denote the event that clique $i$ is monochromatic in $({}_4^n)$ cliques. Also we define that if clique $i$ is monochromatic then random variable $A_i=1$, otherwise $A_i=0$. So $E(A_i) = 2^{-5}$.\\
+	In order to calculate $E(\sum A_i)$ we yields:
+	\begin{equation*}
+	E(\sum A_i) = ({}_4^n)2^{-5}
+	\end{equation*}
+	Using the Lemma 6.2 we have $Pr(\sum A_i \le ({}_4^n)2^{-5})>0 $
+	So there exist one 2-coloring that has at most $({}_4^n)2^{-5}$ $K_4$ are monochromatic.
+	
+	\item
+	Color the edge independently and uniformly. Denote $X = \sum A_i$. Let $p = Pr(X \le ({}_4^n)2^{-5}$. Then we have
+	\begin{equation*}
+	\begin{split}
+	({}_4^n)2^{-5} &= E[X] \\
+	&= \sum_{i \le ({}_4^n)2^{-5}} i Pr(X=i) + \sum_{i \ge ({}_4^n)2^{-5}+1} i Pr(X=i) \\
+	&\ge p + (1-p) ({}_4^n)2^{-5}+1 \\
+	\end{split}
+	\end{equation*}
+	So we have
+	\begin{equation*}
+	\frac{1}{p} \le ({}_4^n)2^{-5}
+	\end{equation*}
+	Thus, the expected number of samples is at most $({}_4^n)2^{-5}$. Testing to see if $X \le ({}_4^n)2^{-5}$ can be done in $O(n^4)$ time. So the algorithm can be done in polynomial time.
+	\end{itemize}
+	
+	\section{Coin}
+	\textbf{Problem}\\
+	Do Bernoulli experiment for 20 trials, using a new 1-Yuan coin.Write down the results in a string $s_1 s_2 \cdots s_{20}$, where $s_i$ is 1 if the $i$-th trial gets Head,and otherwise is 0.
+	\\
+	\textbf{Solution}\\
+	The result of tossing a coin 20 times is:\\11101000111010101000.
+	
+

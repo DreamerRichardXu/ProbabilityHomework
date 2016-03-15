@@ -1,0 +1,53 @@
+\BOOKMARK [0][-]{chapter.1}{Probability Basics}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Coin}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Mutually and Pair-wise independent}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.3}{Monty Hall}{chapter.1}% 4
+\BOOKMARK [1][-]{section.1.4}{Dice}{chapter.1}% 5
+\BOOKMARK [1][-]{section.1.5}{Child Birth}{chapter.1}% 6
+\BOOKMARK [0][-]{chapter.2}{Moments and Inequalities}{}% 7
+\BOOKMARK [1][-]{section.2.1}{Quicksort}{chapter.2}% 8
+\BOOKMARK [1][-]{section.2.2}{Markov's Inequality}{chapter.2}% 9
+\BOOKMARK [1][-]{section.2.3}{Moment and Chernoff Bound}{chapter.2}% 10
+\BOOKMARK [1][-]{section.2.4}{Convex Function and Chernoff Bound}{chapter.2}% 11
+\BOOKMARK [1][-]{section.2.5}{Coin}{chapter.2}% 12
+\BOOKMARK [0][-]{chapter.3}{Bins and balls: handling dependence}{}% 13
+\BOOKMARK [1][-]{section.3.1}{Maxload}{chapter.3}% 14
+\BOOKMARK [1][-]{section.3.2}{Poisson Variables}{chapter.3}% 15
+\BOOKMARK [1][-]{section.3.3}{Birthday}{chapter.3}% 16
+\BOOKMARK [1][-]{section.3.4}{Poisson and Chernoff Bound}{chapter.3}% 17
+\BOOKMARK [1][-]{section.3.5}{Coin}{chapter.3}% 18
+\BOOKMARK [0][-]{chapter.4}{Bins and Balls - Poisson Approximation}{}% 19
+\BOOKMARK [1][-]{section.4.1}{Poisson Distribution}{chapter.4}% 20
+\BOOKMARK [1][-]{section.4.2}{Poisson Distribution 2}{chapter.4}% 21
+\BOOKMARK [1][-]{section.4.3}{Poisson Distribution 3}{chapter.4}% 22
+\BOOKMARK [1][-]{section.4.4}{Agent and Resource}{chapter.4}% 23
+\BOOKMARK [1][-]{section.4.5}{Coin}{chapter.4}% 24
+\BOOKMARK [0][-]{chapter.5}{Bins and Balls - Applications}{}% 25
+\BOOKMARK [1][-]{section.5.1}{Balls Expectation}{chapter.5}% 26
+\BOOKMARK [1][-]{section.5.2}{Bloom Filter}{chapter.5}% 27
+\BOOKMARK [1][-]{section.5.3}{Coin}{chapter.5}% 28
+\BOOKMARK [0][-]{chapter.6}{Set 6-NULL}{}% 29
+\BOOKMARK [0][-]{chapter.7}{The Method of Counting and Expectation}{}% 30
+\BOOKMARK [1][-]{section.7.1}{Turan Theorem}{chapter.7}% 31
+\BOOKMARK [1][-]{section.7.2}{Independent Set}{chapter.7}% 32
+\BOOKMARK [1][-]{section.7.3}{2-Coloring Edge}{chapter.7}% 33
+\BOOKMARK [1][-]{section.7.4}{2-Coloring Edge Proof}{chapter.7}% 34
+\BOOKMARK [1][-]{section.7.5}{Coin}{chapter.7}% 35
+\BOOKMARK [0][-]{chapter.8}{Derandomization, Second Moment Method, Lovasz Local Lemma}{}% 36
+\BOOKMARK [1][-]{section.8.1}{Find Edge Coloring}{chapter.8}% 37
+\BOOKMARK [1][-]{section.8.2}{Second Moment Method}{chapter.8}% 38
+\BOOKMARK [1][-]{section.8.3}{Asymmetric Lovasz Lemma}{chapter.8}% 39
+\BOOKMARK [1][-]{section.8.4}{Vertex Coloring}{chapter.8}% 40
+\BOOKMARK [1][-]{section.8.5}{Read Paper}{chapter.8}% 41
+\BOOKMARK [0][-]{chapter.9}{A Brief Introduction to Markov Chains}{}% 42
+\BOOKMARK [1][-]{section.9.1}{Graph and Matrix}{chapter.9}% 43
+\BOOKMARK [1][-]{section.9.2}{Aperiodic}{chapter.9}% 44
+\BOOKMARK [1][-]{section.9.3}{Hitting Time}{chapter.9}% 45
+\BOOKMARK [1][-]{section.9.4}{Finite and Recurrent}{chapter.9}% 46
+\BOOKMARK [1][-]{section.9.5}{Coin}{chapter.9}% 47
+\BOOKMARK [0][-]{chapter.10}{Excursions and Stationary Distributions of Markov Chains}{}% 48
+\BOOKMARK [1][-]{section.10.1}{Strong Markov Property}{chapter.10}% 49
+\BOOKMARK [1][-]{section.10.2}{Expectation Markov}{chapter.10}% 50
+\BOOKMARK [1][-]{section.10.3}{Excursion and Recurrent}{chapter.10}% 51
+\BOOKMARK [1][-]{section.10.4}{Two Chains Stability}{chapter.10}% 52
+\BOOKMARK [1][-]{section.10.5}{Coin}{chapter.10}% 53

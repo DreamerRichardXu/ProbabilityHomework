@@ -1,0 +1,93 @@
+\chapter{Bins and Balls - Applications}
+	
+	\section{Balls Expectation}
+	\textbf{Problem}\\
+	Let $X_i$ be the number of balls in bin $i$ when $m$ balls are independently and uniformly thrown at random into $n$ bins,and $Y^{(m)}_i$,$1 \leq i \leq n$,are independent Poisson random variables each having expectation $m/n$.Assume that $f$ is a nonnegative function.\\
+	 (1)Prove that if $E[f(X^{(m)}_1,\cdots,X^{(m)}_n)]$ is monotonically increasing in $m$,then $E[f(X^{(m)}_1,\cdots,X^{(m)}_n)] \leq 2E[f(Y^{(m)}_1,\cdots,Y^{(m)}_n)]$.\\
+	 (2)if $E[f(X^{(m)}_1,\cdots,X^{(m)}_n)]$ is monotonically decreasing in $m$,then $E[f(X^{(m)}_1,\cdots,X^{(m)}_n)] \leq 2E[f(Y^{(m)}_1,\cdots,Y^{(m)}_n)]$.\\\\
+	\textbf{Solution}\\
+	\begin{proof}
+		Firstly we'll prove 2 Lemmas:\\
+	\textbf{Lemma 1}:If $Z$ is a Poisson variable of mean $\mu$, where $\mu \ge 1$ is an integer,then $Pr(Z=\mu + h) \geq Pr(Z=\mu - h - 1)$.
+	\begin{proof}
+		\begin{equation*}
+		\begin{split}
+			\frac{Pr(Z=\mu + h)}{Pr(Z=\mu - h - 1)}
+			&= \frac{e^{-\mu}\mu^{\mu+h}}{(\mu + h)!} / \frac{e^{-\mu}\mu^{\mu-h-1}}{(\mu-h-1)!}\\
+			&= \frac{\mu^{2h+1}}{(\mu-h)(\mu-h-1) \cdots (\mu + h)}\\
+			&= \frac{\mu^2}{\mu^2-h^2} \cdot \frac{\mu^2}{\mu^2-(h-1)^2} \cdots \frac{\mu^2}{\mu^2-1^2} \cdot \frac{\mu}{\mu}\\
+			&\geq 1.
+		\end{split}
+	\end{equation*}
+	Such that the proof ends.
+	\end{proof}
+	
+	\textbf{\\Lemma 2}: $Pr(Z\geq\mu)\geq 1/2$.\\
+	\begin{proof}
+		\begin{equation*}
+		\begin{split}
+			1 &= \sum_{k=0}^{\infty}Pr(Z=k)\\
+			&= \sum_{k=0}^{\mu-1}Pr(Z=k)+Pr(Z \geq \mu)\\
+			&\leq \sum_{k=\mu}^{2\mu-1}Pr(Z=k)+Pr(Z \geq \mu)\\
+			&\leq \sum_{k=\mu}^{\infty}Pr(Z=k)+Pr(Z \geq \mu)\\
+			&= Pr(Z \geq \mu)+Pr(Z \geq \mu)\\
+			&= 2Pr(Z \geq \mu)
+		\end{split}
+	\end{equation*}
+	Such that $Pr(Z \geq \mu) \geq 1/2$.\\
+	\end{proof}
+	\textbf{Then comes the problem proof.}
+	\begin{equation*}
+		\begin{split}
+			E \left[f({Y_1}^{(m)},\cdots,{Y_n}^{(m)}) \right]
+			&= \sum_{k \geq 0}^{}E \left[f({Y_1}^{(m)},\cdots,{Y_n}^{(m)})|\sum_{}^{}{Y_i}^{(m)}=k \right]Pr \left(\sum{Y_1}^{(m)}=k \right)\\
+			&\geq \sum_{k\geq m}^{}E \left[f({Y_1}^{(m)},\cdots,{Y_n}^{(m)})|\sum_{}^{}{Y_i}^{(m)}=k \right]Pr \left(\sum{Y_1}^{(m)}=k \right)\\
+			&= E \left[f({X_1}^{(k)},\cdots,{X_n}^{(k)}) \right]Pr \left(\sum{Y_i}^{(m)}=k \right)\\
+			&\geq E \left[f({X_1}^{(m)},\cdots,{X_n}^{(m)}) \right]Pr \left(\sum{Y_i}^{(m)}=k \right)\\
+			&= E \left[f({X_1}^{(k)},\cdots,{X_n}^{(k)}) \right]Pr \left(\sum{Y_i}^{(m)} \geq m \right)\\
+		\end{split}
+	\end{equation*}
+	Let $Z=\sum{Y_i}^{(m)}$.Since each ${Y_i}^{(m)}$ is a Poisson random variable, their sum $Z$ is also a Poisson random variable.Further,the mean value of $Z$ is $m$.Thus,by results from above,$Pr(Z \geq m)\geq 1/2$.Combining it with above,we have
+	\begin{equation*}
+		E \left[f({X_1}^{(m)},\cdots,{X_n}^{(m)}) \right]\leq 2E \left[f({Y_1}^{(m)},\cdots,{Y_n}^{(m)}) \right]
+	\end{equation*}
+	\end{proof}
+	
+	\section{Bloom Filter}
+	\textbf{Problem}\\
+	Bloom filters can be used to estimate set differences. Suppose Alice has a set $X$ and Bob has a set $Y$ , both with $n$ elements. For example, the sets might represent their 100 favorite songs. Alice and Bob create Bloom filters of their sets respectively, using the same number of bits $m$ and the same $k$ hash functions. Determine the expected number of bits where our Bloom filters differ as a function of $m, n, k$ and $|X \bigcap Y|$. Explain how this could be used as a tool to find people with the same taste in music more easily than comparing lists of songs directly.\\\\
+	\textbf{Solution}\\
+	\begin{proof}
+		Let $Z$ be a random variable denoting the number of bits where the Bloom filters differ.Let $Z_i$ be an indicator such that
+	\begin{eqnarray*}
+		Z_i&=&1  \quad \text{if the $i$th bit of the Bloom filters differ}\\
+		Z_i&=&0  \quad \text{otherwise}
+	\end{eqnarray*}
+	Thus,$Z=Z_1+Z_2+ \cdots + Z_m$.\\
+	When $|X\cap Y|=r,Z_i=1$ only happens when each of the $r$ common elements are not mapped to the $i$th bit,together with exactly one of the following cases(that causes the $i$th bit different):\\
+	(a) Some elements of $X-(X \cap Y)$ is mapped to the $i$th bit,but all elements of $Y-(X \cap Y)$ are not;\\
+	(b) Some elements of $Y-(X \cap Y)$ is mapped to the $i$th bit,but all elements of $X-(X \cap Y)$ are not.\\
+	Let $Q_i$ denote the event that the $r$ common elements are not mapped to the $i$th bit.By assuming that the hash functions we choose will map elements independently and uniformly at random to one of the $m$ bits,we have
+	\begin{equation*}
+		\begin{split}
+			Pr(Z_i=1)
+			&= Pr(Q_i \cap (Case(a) or Case(b))\\
+			&= Pr(Q_i)Pr(Case(a) or Case(b))\\
+			&= \left(1-\frac{1}{m}\right)^{rk}\cdot 2 \cdot \left(1-\left(1-\frac{1}{m}\right)^{(n-r)k}\right) \cdot \left(\left(1-\frac{1}{m}\right)^{(n-r)k}\right)\\
+			&= 2 \left(1-\frac{1}{m}\right)^{nk} \left(1-\left(1-\frac{1}{m}\right)^{(n-r)k}\right)
+		\end{split}
+	\end{equation*}
+	As $Z_i$ is an indicator,$E[Z_i]=Pr(Z_i=1)$.Thus,
+	\[
+		E[Z]=\sum_{i=0}^{m-1}E[Z_i]=m \cdot E[Z_i]=2m \left(1-\frac{1}{m}\right)^{nk} \left(1-\left(1-\frac{1}{m}\right)^{(n-r)k}\right)
+	\]
+	\end{proof}
+	
+	\section{Coin}
+	\textbf{Problem}\\
+	Do Bernoulli experiment for 20 trials, using a new 1-Yuan coin.Write down the results in a string $s_1 s_2 \cdots s_{20}$, where $s_i$ is 1 if the $i$-th trial gets Head,and otherwise is 0.
+	\\
+	\textbf{Solution}\\
+	The result of tossing a coin 20 times is:\\11101000111010101000.
+	
+

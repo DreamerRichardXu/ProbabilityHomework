@@ -1,0 +1,147 @@
+\chapter{Derandomization, Second Moment Method,
+	Lovasz Local Lemma}
+
+	\section{Find Edge Coloring}
+	\textbf{Problem}\\
+	For every integer $n$, there exists a coloring of the edges of the complete graph $K_n$ by two colors so that the total number of monochromatic copies of $K_4$ is at most $\binom{n}{4}2^{-5}$. Design a deterministic, efficient algorithm to find such a coloring.\\\\
+	\textbf{Solution}\\
+		Assign values to variables deterministically, one at a time, in an arbitrary order
+		$x_1, x_2, \dots , x_n$. Suppose that we have assigned the first k edge. Let $y_1, y_2, \dots , y_k$
+		be the corresponding assigned values. We compute the two quantities,
+		\begin{equation*}
+			\begin{split}
+				E[X | x_1 = y_1, x_2 = y_2, . . . , x_k = y_k, x_{k+1} = color_1 ]\\
+				E[X | x_1 = y_1, x_2 = y_2, . . . , x_k = y_k, x_{k+1} = color_2 ]\\
+			\end{split}
+		\end{equation*}
+		and then choose the setting with larger expectation.
+	
+	\section{Second Moment Method}
+	\textbf{Problem}\\
+	Consider a graph in $G_{n,p}$ with $p = c\frac{\ln{n}}{n}$. Use the second moment method to prove that if $c < 1$ then, for any constant $\epsilon > 0$ and for $n$ sufficiently large, the graph has isolated vertices with probability at least $1-\epsilon$.\\\\
+	\textbf{Solution}\\
+	\begin{proof}
+		We consider the event $X_i$ denotes that the $i^{th}$ vertex is isolated. So
+	\begin{equation*}
+		X_i = \left \{ \begin{array}{ll}
+			1 & if\ v_i\ is\ isolated \\
+			0 & otherwise
+		\end{array}
+		\right.
+	\end{equation*}
+	Let
+	\begin{equation*}
+		X = \sum_{i=1}^{n} (1-p)^{n-1}.
+	\end{equation*}
+	so that
+	\begin{equation*}
+		E[X] = n (1-p)^{n-1}
+	\end{equation*}
+	In order to prove that if $c < 1$ then, for any constant $\epsilon > 0$ and for $n$ sufficiently large, the graph has no isolated vertex with probability at most $\epsilon$. That means $Pr(X=0)=o(1)$.\\
+	We wish to compute
+	\begin{equation*}
+		Var[X] = Var\left[\sum_{i=1}^{n} X_i\right].
+	\end{equation*}
+	Applying Lemma 6.9, we see that we need to consider the covariance of the $X_i$.
+	\begin{equation*}
+		\begin{split}
+			Cov[X_iX_j] &= E[X_iX_j]-E[X_i]E[X_j]\\
+			&= (1-p)^{2n-3} - (1-p)^{n-1}*(1-p)^{n-1}\\
+			&= p(1-p)^{2n-3}
+		\end{split}
+	\end{equation*}
+	So
+	\begin{equation*}
+		Var[X] \le E[X] + \sum Cov[X_iX_j] = E[X] + o(pn^2(1-p)^{2n-3})
+	\end{equation*}
+	Then
+	\begin{equation*}
+		\begin{split}
+			Pr(X=0) &\le \frac{Var[X]}{E[X]^2}\\
+			&=\frac{1}{n (1-p)^{n-1}} + \frac{p}{1-p}
+		\end{split}
+	\end{equation*}
+	for $p = c\frac{\ln{n}}{n}$ and $c<1$ with $n \to \infty$, $Pr(X=0) \to o(1)$. So the graph has isolated vertices with probability at least $1-\epsilon$.
+	\end{proof}
+	
+	\section{Asymmetric Lovasz Lemma}
+	\textbf{Problem}\\
+	Prove the Asymmetric Lovasz Local Lemma: Let $\mathbb{A} = \{A_1, \dots, A_n\}$ be a set of finite events over a probability space, and for each $1 \le i \le n$, $\tau(A_i) \in \mathbb{A}$ is such that $A_i$ is mutually independent of all events not in $\tau(A_i)$. If $\sum_{A_j \in \tau(A_i)} Pr(A_j) \le 1/4 $ for all $i$, then $ Pr(\bigwedge_{i=1}^n \bar{A_i}) \ge \prod_{i=1}^n (1 - 2Pr(A_i))> 0$. [Hint: let $x(A_i) = 2Pr(A_i)$ and use the general Lovasz Local Lemma.]\\\\
+	\textbf{Solution}\\
+	\begin{proof}
+		First we need to prove a lemma that if $0\le a_i \le 1/2$ for all $i=1,2,\dots,n$, then $\prod_{i=1}^n (1-2a_i) \ge 1-2\sum_{i=1}^n a_i$.\\
+	Induction for $n$. When $n=1$, the inequality holds obviously. Assume that when $n=k$, the inequality holds. Consider the case when $n=k+1$,
+	\begin{equation*}
+		\begin{split}
+			\prod_{i=1}^{k+1}(1-2a_i) &= \prod_{i=1}^k (1-2a_i) (1-2a_{k+1}) \\
+			&\ge (1-2\sum_{i=1}^k a_i)(1-2a_{k+1})\\
+			&= 1-2\sum_{i=1}^{k+1} a_i + 4\sum_{i=1}^k a_i a_{k+1}\\
+			&\ge 1-2\sum_{i=1}^{k+1} a_i
+		\end{split}
+	\end{equation*}
+	So the inequality holds.\\
+	Using the general Lovasz Local Lemma, we set $x(A_i) = 2Pr(A_i)$. Then
+	\begin{equation*}
+		\begin{split}
+			x(A_i)\prod_{A_j\in \Gamma(A_i)}(1-x(A_j)) &= 2Pr(A_i)\prod_{A_j\in \Gamma(A_i)}(1-2Pr(A_j))\\
+			&\ge 2Pr(A_i) (1-2\sum_{A_j\in \Gamma(A_i)}Pr(A_j)\\
+			&\ge 2Pr(A_i) (1 - 2 * 1/4)\\
+			&= Pr(A_i)
+		\end{split}
+	\end{equation*}
+	So the general Lovasz Local Lemma condition holds. Then we have the result
+	\begin{equation*}
+		\begin{split}
+			Pr(\bigwedge_{i=1}^n \bar{A_i}) &\ge \prod_{i=1}^n (1 - x(A_i))\\
+			&= \prod_{i=1}^n (1 - 2Pr(A_i))\\
+			&> 0.
+		\end{split}
+	\end{equation*}
+	\end{proof}
+	
+	\section{Vertex Coloring}
+	\textbf{Problem}\\
+	Given $\beta > 0$, a vertex-coloring of a graph $G$ is said to be $\beta$-frugal if (i) each pair of adjacent vertices has different colors, and (ii) no vertex has $\beta$ neighbors that have the same color.\\
+	Prove that if $G$ has maximum degree $\Delta \ge \beta^\beta$ with $\beta \ge 2$, then $G$ has a $\beta$-frugal coloring with $16\Delta^{1+1/\beta}$ colors. [Hint: you may want to define two types of events corresponding to the two conditions of being $\beta$-frugal. Then the result in question 2 can be used.]\\\\
+	\textbf{Solution}\\
+	\begin{proof}
+		By the following equation
+	\begin{equation*}
+		\binom{\Delta + 1}{\beta} = \binom{\Delta}{\beta} + \binom{\Delta}{\beta - 1}
+	\end{equation*}
+	we can prove that $({}_\beta^\Delta)$ is monotonically increasing for $\Delta$ when $\beta$ is given.\\
+	Let the number of colors used to $\beta$-frugal coloring be $N=16\Delta^{1+1/\beta}$, and the algorithm assigns each vertex a uniformly random color.\\
+	Now we define two types of events with total number of $m + n$, when n is the number of vertices, and $m$ is the number of edges:
+	\begin{itemize}
+		\item The pair vertices of $e_i$ has the same color;
+		\item The vertex $v_i$ has $\beta$ neighbors that have the same color.
+	\end{itemize}
+	Define $d_i$ is the degree of vertex $i$.\\
+	For each event $A_i$ in type $I$,
+	\begin{equation*}
+		Pr(A_i)=\frac{1}{N}
+	\end{equation*}
+	For each event $A_i$ in type $II$,
+	\begin{equation*}
+		\begin{split}
+			Pr(A_i) &= \binom{d_i}{\beta} \left(\frac{1}{N} \right)^{\beta-1}\\
+			&\le \binom{\Delta}{\beta} \left(\frac{1}{N} \right)^{\beta-1}
+		\end{split}
+	\end{equation*}
+	
+	Consider the number of dependent events of each event in type $I$. First, each edge connected to the two vertices in the given edge has an event in type $I$, whose total number is at most $2(\Delta ? 1)$. Second, each vertex of the edge has an event in type $II$, whose total number is exactly 2. Thus, for each event $A_i$ in type $I$,
+	\begin{equation*}
+		\begin{split}
+			\sum_{A_j \in \Gamma(A_i)} Pr(A_j) &\le 2(\Delta-1)\frac{1}{N} + 2\binom{\Delta}{\beta} \left(\frac{1}{N} \right)^{\beta-1}\\
+			&= 2 \left[(\Delta-1)\frac{1}{16\Delta^{1+1/\beta}} \right] + \binom{\Delta}{\beta}  \left(\frac{1}{16\Delta^{1+1/\beta}} \right)^{\beta-1}\\
+			&\le 2 \left[\frac{1}{16} + \Delta \dot (\Delta-1) \cdots (\Delta-\beta+1) \right]
+		\end{split}
+	\end{equation*}
+	
+	This definition for events is hard to prove. Another proof from Alistair Sinclair is in the last section.
+	\end{proof}
+	
+	\section{Read Paper}
+	\textbf{Problem}\\
+	Read the paper ``A constructive proof of the general Lovasz Local Lemma''.\\
+

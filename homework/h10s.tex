@@ -1,0 +1,121 @@
+\chapter{Excursions and Stationary Distributions of Markov
+	Chains}
+	
+	\section{Strong Markov Property}
+	\textbf{Problem}\\
+	In the proof of strong Markov property, we claim that there is an event $\mathbb{A}$ such that\\
+	(1)$\mathbb{A}$ is determined by $X_1,X_2,\cdots,X_{n-1}$\\
+	(2)$(X_{n-s}=i_s,0 \leq s\leq n,\tau=n)=(X_n=i_0,\mathbb{A}(X_{n-1},\cdots,X_0))$.\\
+	Prove this claim. (hint: use the definition of stopping time)\\\\
+	\textbf{Solution}\\
+	\begin{proof}
+		Let $T$ be a stopping time and $\mathbb{A}$ is determined by the past $(X_0,X_1,...,X_n)$ if $T < \infty$. Since $(X_0,...,X_T) \mathbf{I} (T<\infty)=\sum_{n \in \mathbb{Z}+}^{}(X_0,...,X_n) \mathbf{I} (T=n)$,any such $\mathbb{A}$ must have the property that,for all $n\in \mathbb{Z}+,\mathbb{A} \cap {T=n}$ is determined by $(X_0,...,X_n)$.We are going to show that for any such $\mathbb{A}$,
+		\[
+		P(X_{T+1}=j_1,X_{T+2}=j_2,...;\mathbb{A}|X_T,T<\infty)=P(X_{T+1}=i_1,X_{T+2}=i_2,...|X_T=i,T<\infty)P(\mathbb{A}|X_T,T<\infty)
+		\]
+		and that
+		\[
+		P(X_{T+1}=j_1,X_{T+2}=j_2,...|X_T=i,T<\infty)=p_{i,j_1} p_{j_1,j_2}\cdots
+		\]
+		We have:
+		\[
+		P(X_{T+1}=j_1,X_{T+2}=j_2,...;\mathbb{A},X_T=i,T=n)=P(X_{n+1}=j_1,X_{n+2}=j_2,...;\mathbb{A},X_n=i,T=n).
+		\]
+		Such that the proof ends.
+	\end{proof}
+	
+	
+	\section{Expectation Markov}
+	\textbf{Problem}\\
+	Consider an irreducible Markov chain ${X_n, n \geq 0}$ with state space S and a positive recurrent state $a$. It has a unique stationary distribution $\pi$ over $S$. For any function $f:S \rightarrow R$,prove that $\frac{E[\sum_{n=0}^{T_{aa}-1}f(X_n)]}{E[T_{aa}]}$ equals $E_\pi[f]$,the expectation of $f$ with respect to $\pi$.\\\\
+	\textbf{Solution}\\
+	\begin{proof}
+		Since $a$ is positive recurrent, $\lim\limits_{t \rightarrow \infty}N_t = \infty$.By law of large number,$\lim\limits_{t \rightarrow \infty}\frac{1}{N_t}\sum_{r=1}^{mN_{t-1}}G_r=E \left[\sum_{n=0}^{T_{aa}-1}f(X_n)\right]$.
+	So:
+	\[
+	\frac{T^{N_t}_a}{N_t} \leq \frac{t}{N_t} \leq \frac{T^{N_t+1}_a}{N_t}
+	\]
+	
+	\[
+	T^r_a = T^1_a+\sum_{k=2}^{r}(T^k_a-T^{k-1}_a)=T^1_a+\sum_{k=1}^{r-1}T^k_{aa}
+	\]
+	
+	\[
+	P(T_a<\infty)=1,so \lim\limits_{t \rightarrow \infty}\frac{T^1_a}{n_t}=0
+	\]
+	By law of large number
+	\[
+	\lim\limits_{t \rightarrow \infty}\frac{T^a_{N_t}}{N_t}=\lim\limits_{t \rightarrow \infty} \frac{T^{N_t+1}}{N_t}=E{T_{aa}}.
+	\]
+	So
+	\[
+	\lim\limits_{t \rightarrow \infty}\frac{t}{N_t}=E[T_{aa}] 
+	\]
+	Such that $\lim\limits_{t \rightarrow \infty}\frac{f(X_0+...+f(X_t))}{t}=\frac{E\left[\sum_{n=0}^{T_{aa}-1}f(X_n)\right]}{E[T_{aa}]}$.
+	\end{proof}
+	
+	\section{Excursion and Recurrent}
+	\textbf{Problem}\\
+	Use the concept of an excursion to prove that for a Markov chain, a state $j$ is recurrent if $i$ leads to $j$ and $i$ is recurrent.\\\\
+	\textbf{Solution}\\
+	\begin{proof}
+		\textbf{Proof without excursion}\\
+	Suppose that state $i$ is recurrent, so $\sum_n p_{ii}^{(n)} = +\infty$. As we know state $j$ and $i$ belong to the same communicating class. So there exist $k_1$ and $k_2$ that $p_{ij}^{(k_1)} >0$ and $p_{ji}^{(k_2)} >0$.\\
+	For all $n>0$ that
+	\begin{equation*}
+		p_{jj}^{(k_1+k_2+n)} \ge p_{ji}^{(k_1)} p_{ii}^{(n)} p_{ij}^{(k_2)}
+	\end{equation*}
+	so we have
+	\begin{equation*}
+		\begin{split}
+			\sum_n p_{jj}^{(n)} &\ge \sum_n p_{jj}^{(k_1+k_2+n)} \\
+			&\ge \sum_n p_{ji}^{(k_1)} p_{ii}^{(n)} p_{ij}^{(k_2)} \\
+			&= p_{ji}^{(k_1)} p_{ij}^{(k_2)} \sum_n p_{ii}^{(n)} \\
+			&\ge +\infty
+		\end{split}
+	\end{equation*}
+	So $j$ is recurrent.\\
+	\textbf{Proof using excursion}\\
+	Start with $X_0=i$.If $i$ is recurrent and $i\rightsquigarrow j$ then there is a positive probability ($=f_{ij}$) that $j$ will appear in one of the i.i.d. excursions $\mathscrbf{X}^{(0)}_i,\mathscrbf{X}^{(1)}_i,...,$ and so the probability that $j$ will appear in a specific excursion is positive. So the random variables
+	\[
+	\delta_{j,r} := \mathbf{1}(j \text{\ appears in excursion\ } \mathscrbf{X}^{(r)}_i),r=0,1,...
+	\]
+	are i.i.d. and since they take the value 1 with positive probability,infinitely many of them will be 1(with probability 1),showing that $j$ will appear in infinitely many of the excursions for sure. Hence,not only $f_{ij} > 0$,but also $f_{ij}=1$. Hence,$j \rightsquigarrow i$. The last statement is simply an expression in symbols of what we said above. Indeed,the probability that $j$ will appear in a specific excursion equals $g_{ij}=P_{i}(T_j<T_i)$.
+	\end{proof}
+	
+	\section{Two Chains Stability}
+	\textbf{Problem}\\
+	In the proof of the stability theorem, assume that the two independent Markov chains ${X_n, n \geq 0}$ and ${Y_n, n \geq 0}$ encounter at time $T$. Prove that $Pr(T < \infty) = 1$.\\\\
+	\textbf{Solution}\\
+	\begin{proof}
+		Consider the process
+	\[
+	W_n :=(X_n,Y_n).
+	\]
+	Then $(W_n,n \geq 0)$ is a Markov chain with state process $S \times S$.Its initial state $W_0=(X_0,Y_0)$ has distribution $P(W_0=(x,y))=\mu(x)\mu(y)$.Its (1-step) transition probabilities are
+	\[
+	q_{(x,x'),(y,y')}:=P(W_{n+1}=(x',y')|W_n=(x,y))=P(X_{n+1}=x'|X_n=x)P(Y_{n+1}=y'|Y_n=y)=p_{x,x'}p_{y,y'}
+	\]
+	Its $n$-step transition probabilities are
+	\[
+	q^{(n)}_{(x,x'),(y,y')}=p^{(n)}_{x,x'},p^{(n)}_{y,y'}.
+	\]
+	From aperiodicity assumption we have that $p^{(n)}_{x,x'} >0$ and $p^{(n)}_{y,y'}$ for all large $n$,implying that $q^{(n)}_{(x,x'),(y,y')}$ for all large $n$,and so $(W_n,n \geq 0)$ is an irreducible chain.Notice that
+	\[
+	\sigma(x,y):=\pi(x)\pi(y),    (x,y) \in S \times S,
+	\]
+	is a stationary distribution for $W_n,n \geq 0$.By positive recurrence,$\pi(x)>0$ for all $x \in S$.Therefore $\sigma(x,y)>0$ for all $(x,y) \in S \times S$.Hence $W_n,n \geq 0$ is positive recurrent.In particular,
+	\[
+	P(T<\infty)=1.
+	\]
+	Such that the proof ends.
+	\end{proof}
+
+	\section{Coin}
+	\textbf{Problem}\\
+	Do Bernoulli experiment for 20 trials, using a new 1-Yuan coin.Write down the results in a string $s_1 s_2 \cdots s_{20}$, where $s_i$ is 1 if the $i$-th trial gets Head,and otherwise is 0.
+	\\
+	\textbf{Solution}\\
+	The result of tossing a coin 20 times is:\\11101000111010101000.
+
+	
